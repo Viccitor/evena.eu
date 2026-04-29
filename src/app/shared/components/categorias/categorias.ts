@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-categorias',
@@ -20,11 +20,9 @@ export class Categorias {
     { id: 10, nome: "Games", icone: 'categorias/games.png' }
   ];
 
-  // Referência para a div .grid-eventos no HTML
   @ViewChild('carousel') carousel!: ElementRef;
 
   scrollDireita() {
-    // Rola 333px (largura do seu card) + gap
     this.carousel.nativeElement.scrollLeft += 380;
   }
 

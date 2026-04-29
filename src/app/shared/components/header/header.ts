@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -12,5 +12,12 @@ export class Header {
 
   toggleMenu() {
     this.menuAberto = !this.menuAberto;
+  }
+
+  constructor(private router: Router){}
+
+  OnSearch(event: any){
+    const termo = event.target.value;
+    this.router.navigate(['/eventos'], {queryParams: {q: termo} });
   }
 }

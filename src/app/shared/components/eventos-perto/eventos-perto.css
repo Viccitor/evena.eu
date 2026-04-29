@@ -4,6 +4,10 @@
     justify-content: center;
     align-items: center;
 }
+
+#sessao-eventos-perto-gps{
+    margin-top: 10px;
+}
 .container-eventos {
     width: 95%; 
     max-width: 1650px;

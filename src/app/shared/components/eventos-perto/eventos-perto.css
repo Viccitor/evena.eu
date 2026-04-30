@@ -75,6 +75,11 @@
     width: 94.3%;
 }
 
+.container-card-distancia {
+    display: flex;
+    flex-direction: column;
+}
+
 /* --- SETAS  --- */
 .seta-carousel {
     position: absolute;

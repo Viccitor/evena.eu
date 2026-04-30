@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, HostListener, ChangeDetectorRef } from '@angular/core';
 import { Evento } from '../../../model/evento';
+import { EventoService } from '../../../services/evento-service';
 
 @Component({
   selector: 'app-banner-eventos',
@@ -8,22 +9,33 @@ import { Evento } from '../../../model/evento';
   styleUrl: './banner-eventos.css',
 })
 export class BannerEventos implements OnInit, OnDestroy {
-  listaBanner: Evento[] = [
-    { id: 6, titulo: 'Jão - SUPERTURNÊ', data: '15 de Jan', local: 'Allianz Parque', imagem: 'https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/01/jao-superturne.jpg?w=849&h=477&crop=0' },
-    { id: 10, titulo: 'Festival de Verão', data: '20 de Fev', local: 'Salvador - BA', imagem: 'evento1.jpg' },
-    { id: 11, titulo: 'Show do Bita - Festa dos Animais', data: '25 de Mar', local: 'Rio de Janeiro - RJ', imagem: 'https://irp.cdn-website.com/2c226423/dms3rep/multi/mundo+bita+em+joinville.jpeg' },
-    { id: 12, titulo: 'Guns N’ Roses', data: '25 de Out', local: 'São Paulo - SP', imagem: 'https://legatos.com.br/uploads/2025/06/guns-n-roses-anuncia-cinco-shows-no-brasil-em-2025-datas-e-cidades-confirmadas.webp' },
-    { id: 3, imagem: 'banners/1.png'}
-  ];
-
+  listaBanner: Evento[] = []; // Começa vazia
   index = 0;
   timer: any;
+
+  idsDestaque = [1, 3, 4, 6, 8];
+
   private touchStartX = 0;
   private touchEndX = 0;
   private isMoving = false; // Proteção para não clicar enquanto desliza
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(
+    private eventoService: EventoService,
+    private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
+    // 1. Pega todos os eventos do service
+    const todosEventos = this.eventoService.getEventos();
+
+    // 2. Filtra para mostrar apenas os IDs que estão na lista de destaques
+    this.listaBanner = todosEventos.filter(evento => 
+      this.idsDestaque.includes(evento.id)
+    );
+
+    // 3. Opcional: Se quiser garantir uma ordem específica baseada no array idsDestaque
+    this.listaBanner.sort((a, b) => 
+      this.idsDestaque.indexOf(a.id) - this.idsDestaque.indexOf(b.id)
+    );
+
     this.iniciarTimer();
   }
 

@@ -1,0 +1,37 @@
+name: Sync Fork
+
+on:
+  schedule:
+    - cron: '*/5 * * * *' # Tentativa de rodar a cada 5 minutos
+  workflow_dispatch: 
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Sync with upstream
+        run: |
+          # 1. Configura a identidade do Git
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+
+          # 2. Adiciona o repositório original (upstream)
+          git remote add upstream https://github.com/Eubiass/evena.4.git
+          git fetch upstream
+
+          # 3. O Pulo do Gato: Faz o merge mas prioriza o original
+          # Isso mantém o que você tem de diferente (a pasta .github)
+          git merge upstream/main --allow-unrelated-histories -m "Sync: Atualizando arquivos do original"
+
+          # 4. Garante que a sua pasta .github NÃO foi mexida
+          git checkout HEAD -- .github/workflows/
+
+          # 5. Empurra as atualizações de volta para o SEU repositório
+          git push origin main

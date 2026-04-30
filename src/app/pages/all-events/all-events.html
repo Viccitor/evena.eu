@@ -17,6 +17,13 @@
           }
         </div>
       </nav>
+
+      @if (categoriaSelecionada === 'Todos' && listaExibida.length < eventosTotais.length) {
+        <div class="feedback-busca">
+          <p>Mostrando resultados encontrados...</p>
+          <button (click)="limparBusca()">Limpar pesquisa</button>
+        </div>
+      }
      
       <main>
 

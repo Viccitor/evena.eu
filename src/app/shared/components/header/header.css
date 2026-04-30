@@ -58,24 +58,24 @@
 }
 
 /* --- BARRA DE BUSCA --- */
-.btn_procurar {
-    border: 1.5px #579247 solid;
-    border-radius: 10px;
-    width: 200px;
-    height: 38px;
+.btn_search {
+    cursor: text;
     display: flex;
     align-items: center;
-    padding: 0 10px;
-    background-color: var(--cor-principal);
+    border: 1.5px solid #579247;
+    border-radius: 10px;
+     padding: 5px 10px;
+    background: var(--cor-principal);
+    transition: all 0.3s ease;
 }
 
-.procurar {
+.search {
     height: 25px;
     width: 25px;
     padding-right: 10px;
 }
 
-.input_busca {
+#campo_busca {
     border: none;
     outline: none;
     background: transparent;
@@ -84,7 +84,7 @@
     width: 100%;
 }
 
-.input_busca::placeholder {
+#campo_busca::placeholder {
     color: #579247;
 }
 
@@ -140,6 +140,7 @@
     color: var(--cor-secundaria);
     font-size: 35px;
     cursor: pointer;
+    padding-left: 10px;
 }
 
 .mobile-nav {
@@ -163,6 +164,62 @@
     width: 100%;
 }
 
+.app-header.busca-ativa {
+        justify-content: center; /* Centraliza a barra de busca */
+    }
+
+    .header-section.right.expandida {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 0 10px;
+    }
+
+    .btn_search.active {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid var(--cor-secundaria); /* Cor verde do seu logo */
+        border-radius: 25px;
+        display: flex;
+        align-items: center;
+        padding: 5px 15px;
+    }
+
+    .search-trigger{
+        background: transparent; /* Remove o fundo branco/cinza */
+        border: none;            /* Remove bordas padrão */
+        padding: 0;             /* Remove espaços internos que podem causar sombras */
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        outline: none;
+    }
+
+    .search {
+    width: 30px;
+    height: 30px;
+    background: transparent; /* Garante que a imagem em si não tenha fundo */
+    display: block;
+    }
+
+    #campo-busca {
+        background: transparent;
+        border: none;
+        color: var(--cor-secundaria);
+        width: 100%;
+        margin-left: 10px;
+        outline: none;
+        font-size: 16px; /* Evita zoom automático no iOS */
+    }
+
+    .btn-fechar {
+        background: none;
+        border: none;
+        color: var(--cor-secundaria);
+        font-size: 20px;
+        padding-left: 10px;
+    }
+
 /* --- RESPONSIVIDADE --- */
 
 /* Ponto de transição para Tablet/Mobile */
@@ -179,15 +236,14 @@
         display: flex;
     }
 
-    .btn_procurar {
-        width: 40px;
-        border: none;
-        padding: 0;
-        justify-content: center;
-        margin-right: 0;
+    .btn_search {
+    border-color: transparent;
+    background: transparent;
+    width: 40px;
+    padding: 0;
     }
 
-    .input_busca {
+    #campo_busca.hide-mobile {
         display: none;
     }
 
@@ -203,6 +259,46 @@
         width: 35px;
         height: 35px;
         color: var(--cor-secundaria);
+    }
+    .app-header.busca-ativa {
+        justify-content: center; /* Centraliza a barra de busca */
+    }
+
+    .header-section.right.expandida {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 0 10px;
+    }
+
+    .btn_search.active {
+        position: absolute;
+        left: 15px;
+        right: 15px;
+        width: auto;
+        background: var(--cor-principal);
+        border-color: var(--cor-secundaria);
+        border-radius: 25px;
+        padding: 8px 15px;
+        z-index: 10;
+    }
+
+    #campo-busca {
+        background: transparent;
+        border: none;
+        color: white;
+        width: 100%;
+        margin-left: 10px;
+        outline: none;
+        font-size: 16px; /* Evita zoom automático no iOS */
+    }
+
+    .btn-fechar {
+        background: none;
+        border: none;
+        color: var(--cor-secundaria);
+        font-size: 20px;
+        padding-left: 10px;
     }
 }
 /* Ajustes finos para celulares pequenos */

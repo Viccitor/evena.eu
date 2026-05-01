@@ -1,7 +1,41 @@
 <section id="sessao-todos-eventos">
    <div class="container-todos-eventos">
       <header>
-        <h1 class="titulo-sessao">Todos os Eventos</h1>
+        <h1 class="titulo-sessao">Eventos em 
+          <span class="wrapper-estado">
+            <select class="select-estado-topo" [(ngModel)]="estadoSelecionado" (change)="trocarEstadoManual()">
+              <option value="">Brasil</option>
+              <option value="AC">Acre</option>
+              <option value="AL">Alagoas</option>
+              <option value="AP">Amapá</option>
+              <option value="AM">Amazonas</option>
+              <option value="BA">Bahia</option>
+              <option value="CE">Ceará</option>
+              <option value="DF">Distrito Federal</option>
+              <option value="ES">Espírito Santo</option>
+              <option value="GO">Goiás</option>
+              <option value="MA">Maranhão</option>
+              <option value="MT">Mato Grosso</option>
+              <option value="MS">Mato Grosso do Sul</option>
+              <option value="MG">Minas Gerais</option>
+              <option value="PA">Pará</option>
+              <option value="PB">Paraíba</option>
+              <option value="PR">Paraná</option>
+              <option value="PE">Pernambuco</option>
+              <option value="PI">Piauí</option>
+              <option value="RJ">Rio de Janeiro</option>
+              <option value="RN">Rio Grande do Norte</option>
+              <option value="RS">Rio Grande do Sul</option>
+              <option value="RO">Rondônia</option>
+              <option value="RR">Roraima</option>
+              <option value="SC">Santa Catarina</option>
+              <option value="SP">São Paulo</option>
+              <option value="SE">Sergipe</option>
+              <option value="TO">Tocantins</option>
+            </select>
+            <i class="fa-solid fa-caret-down"></i>
+          </span>
+        </h1>
       </header>
      
       <nav class="categorias-nav">
@@ -18,7 +52,41 @@
         </div>
       </nav>
 
-      @if (categoriaSelecionada === 'Todos' && listaExibida.length < eventosTotais.length) {
+      <nav class="filtros-nav">
+        <label class="btn-filtrar-cidade" for="campo-cidade">
+          <button type="button">
+            <i class="fa-solid fa-location-dot"></i>
+          </button>
+          <input 
+            id="campo-cidade"
+            type="text"
+            placeholder="Cidade"
+            list="cidades-sugeridas"
+            [(ngModel)]="cidadeFiltro" 
+            (input)="aplicarFiltrosCombo()"
+            (focus)="abrirDatalist()">
+
+            <datalist id="cidades-sugeridas">
+              @for (cidade of cidadesComEventos; track cidade) {
+                <option [value]="cidade"></option>
+              }
+            </datalist>
+
+          <button type="button" class="btn-seta" (click)="focarNoInput()">
+            <i class="fa-solid fa-caret-down"></i>
+          </button>
+        </label>
+
+        <label class="btn-filtrar-data" for="campo-data">
+          <input 
+            id="campo-data"
+            type="date"
+            [(ngModel)]="dataFiltro"
+            (change)="aplicarFiltrosCombo()">
+        </label>
+      </nav>
+
+      @if (temFiltroAtivo) {
         <div class="feedback-busca">
           <p>Mostrando resultados encontrados...</p>
           <button (click)="limparBusca()">Limpar pesquisa</button>

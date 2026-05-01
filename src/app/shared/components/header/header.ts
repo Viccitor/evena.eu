@@ -1,18 +1,34 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-header',
   standalone: true, // Garante que é standalone
-  imports: [RouterLink, RouterLinkActive], // Adicione CommonModule aqui
+  imports: [RouterLink, RouterLinkActive, FormsModule], // Adicione CommonModule aqui
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
 export class Header {
   menuAberto = false;
   pesquisaAtiva = false;
+  termoPesquisa = '';
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit(){
+    // Escuta a URL. Se o parâmetro 'q' sumir, limpa a caixa de texto
+    this.route.queryParams.subscribe(params => {
+      if (!params['q']) {
+        this.termoPesquisa = ''; 
+      } else {
+        this.termoPesquisa = params['q']; // Mantém o texto sincronizado com a URL
+      }
+    });
+  }
 
   toggleMenu() {
     this.menuAberto = !this.menuAberto;
@@ -32,12 +48,11 @@ export class Header {
     }
   }
 
-  pesquisar(event: any) {
-    const valor = event.target.value;
-    if (valor.trim()) {
-      this.router.navigate(['/eventos'], { queryParams: { q: valor } });
+  // Função disparada ao digitar ou dar Enter
+  fazerPesquisa() {
+    if (this.termoPesquisa.trim()) {
+      this.router.navigate(['/eventos'], { queryParams: { q: this.termoPesquisa } });
       
-      // Opcional: fechar a barra após pesquisar no mobile
       if (window.innerWidth <= 768) {
         this.pesquisaAtiva = false;
       }

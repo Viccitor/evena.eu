@@ -17,7 +17,6 @@ export class EventosPerto implements OnInit {
   // LISTA DE EVENTOS
   eventosCidadeIP: Evento[] = [];      // Para a seção "Eventos em [Cidade]"
   eventosProximosGps: Evento[] = [];   // Para a seção "Eventos perto de você"
-
   localizacaoAtiva = false;
   cidadeDetectada = '';
 

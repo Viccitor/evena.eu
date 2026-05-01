@@ -16,7 +16,7 @@
 
   <section class="header-section right" [class.expandida]="pesquisaAtiva">
     
-    <label class="btn_search" [class.active]="pesquisaAtiva" for="campo-busca">
+    <label class="btn-search" [class.active]="pesquisaAtiva" for="campo-busca">
       <button type="button" class="search-trigger" (click)="togglePesquisa()">
         <img src="search.png" class="search" alt="Pesquisar">
       </button>
@@ -25,8 +25,9 @@
         type="text" 
         placeholder="Pesquisar..." 
         id="campo-busca"
-        (keyup.enter)="pesquisar($event)"
-        [class.hide-mobile]="!pesquisaAtiva">
+        [(ngModel)]="termoPesquisa"
+        (keyup.enter)="fazerPesquisa()"
+        >
 
       @if (pesquisaAtiva) {
         <button (click)="togglePesquisa()" class="btn-fechar" type="button" aria-label="Fechar busca">×</button>

@@ -1,0 +1,28 @@
+<form class="busca-container" role="search">
+  <div class="input-group">
+    <i class="fa-solid fa-location-dot icon"></i>
+    <input 
+      type="text" 
+      [(ngModel)]="cidade" 
+      name="cidade"
+      (input)="aoMudarCidade()"
+      placeholder="Cidade"
+      list="lista-cidades"> <datalist id="lista-cidades">
+      @for (cidade of cidadesSugestao; track cidade) {
+        <option [value]="cidade"></option>
+      }
+    </datalist>
+
+    <i class="fa-solid fa-chevron-down arrow"></i>
+</div>
+
+  <div class="input-group">
+    <i class="fa-solid fa-calendar-days icon"></i>
+    <input 
+      type="date" 
+      [(ngModel)]="data" 
+      name="data"
+      (change)="aoMudarData()"
+      aria-label="Filtrar por data">
+  </div>
+</form>

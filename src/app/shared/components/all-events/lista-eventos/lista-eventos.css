@@ -1,0 +1,43 @@
+.lista-eventos-container {
+  padding: 20px 0;
+  width: 100%;
+}
+
+.grid-eventos {
+  display: grid;
+  /* Cria colunas de no mínimo 280px. Se couber mais uma, ele adiciona automaticamente */
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  justify-items: center;
+}
+
+.empty-state {
+  grid-column: 1 / -1; /* Ocupa a largura total do grid */
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--cor-secundaria);
+}
+
+.icon-empty {
+  font-size: 4rem;
+  color: var(--cor-principal);
+  margin-bottom: 15px;
+  opacity: 0.5;
+}
+
+.empty-state h3 {
+  font-family: var(--fonte-principal);
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.empty-state p {
+  opacity: 0.7;
+}
+
+.loading {
+  text-align: center;
+  color: var(--cor-principal);
+  font-family: var(--fonte-principal);
+  margin-top: 50px;
+}

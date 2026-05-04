@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
-import { CardEvento } from "../card-evento/card-evento";
-import { Evento } from '../../../model/evento';
-import { EventoService } from '../../../services/evento-service';
+import { CardEvento } from "../../card-evento/card-evento";
+import { Evento } from '../../../../model/evento';
+import { EventoService } from '../../../../services/evento-service';
 import { RouterLink } from "@angular/router";
 
 @Component({
@@ -35,9 +35,9 @@ export class EventosPerto implements OnInit {
 
     // Filtro inteligente: procura "São Paulo" ou "SP"
     this.eventosCidadeIP = todos.filter(e => {
-      const local = e.local.toLowerCase();
+      const local = e.cidade.toLowerCase();
       return local.includes(cidade) || 
-             (cidade === 'são paulo' && local.includes('sp'));
+             (cidade === 'são paulo' && cidade.includes('sp'));
     });
 
     if (this.eventosCidadeIP.length === 0) this.eventosCidadeIP = todos;

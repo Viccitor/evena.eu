@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { BannerEventos } from "../../shared/components/banner-eventos/banner-eventos";
-import { EventosPerto } from "../../shared/components/eventos-perto/eventos-perto";
-import { Categorias } from "../../shared/components/categorias/categorias";
+import { EventosPerto } from "../../shared/components/home/eventos-perto/eventos-perto";
+import { Categorias } from "../../shared/components/home/categorias/categorias";
+import { BannerEventos } from '../../shared/components/home/banner-eventos/banner-eventos';
 
 @Component({
   selector: 'app-home',

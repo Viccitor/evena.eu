@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, HostListener, ChangeDetectorRef } from '@angular/core';
-import { Evento } from '../../../model/evento';
-import { EventoService } from '../../../services/evento-service';
+import { Evento } from '../../../../model/evento';
+import { EventoService } from '../../../../services/evento-service';
 
 @Component({
   selector: 'app-banner-eventos',

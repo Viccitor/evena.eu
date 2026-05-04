@@ -49,13 +49,15 @@ export class Header {
   }
 
   // Função disparada ao digitar ou dar Enter
-  fazerPesquisa() {
-    if (this.termoPesquisa.trim()) {
-      this.router.navigate(['/eventos'], { queryParams: { q: this.termoPesquisa } });
-      
-      if (window.innerWidth <= 768) {
-        this.pesquisaAtiva = false;
-      }
+    fazerPesquisa() {
+    // Navega mesmo se estiver vazio para permitir "limpar" a busca
+    this.router.navigate(['/eventos'], { 
+      queryParams: { q: this.termoPesquisa.trim() || null }, // Se vazio, remove o 'q' da URL
+      queryParamsHandling: 'merge' // Mantém outros filtros se houver
+    });
+    
+    if (window.innerWidth <= 768 && this.termoPesquisa.trim()) {
+      this.pesquisaAtiva = false;
     }
   }
 }

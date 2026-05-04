@@ -1,114 +1,12 @@
 <section id="sessao-todos-eventos">
-   <div class="container-todos-eventos">
-      <header>
-        <h1 class="titulo-sessao">Eventos em 
-          <span class="wrapper-estado">
-            <select class="select-estado-topo" [(ngModel)]="estadoSelecionado" (change)="trocarEstadoManual()">
-              <option value="">Brasil</option>
-              <option value="AC">Acre</option>
-              <option value="AL">Alagoas</option>
-              <option value="AP">Amapá</option>
-              <option value="AM">Amazonas</option>
-              <option value="BA">Bahia</option>
-              <option value="CE">Ceará</option>
-              <option value="DF">Distrito Federal</option>
-              <option value="ES">Espírito Santo</option>
-              <option value="GO">Goiás</option>
-              <option value="MA">Maranhão</option>
-              <option value="MT">Mato Grosso</option>
-              <option value="MS">Mato Grosso do Sul</option>
-              <option value="MG">Minas Gerais</option>
-              <option value="PA">Pará</option>
-              <option value="PB">Paraíba</option>
-              <option value="PR">Paraná</option>
-              <option value="PE">Pernambuco</option>
-              <option value="PI">Piauí</option>
-              <option value="RJ">Rio de Janeiro</option>
-              <option value="RN">Rio Grande do Norte</option>
-              <option value="RS">Rio Grande do Sul</option>
-              <option value="RO">Rondônia</option>
-              <option value="RR">Roraima</option>
-              <option value="SC">Santa Catarina</option>
-              <option value="SP">São Paulo</option>
-              <option value="SE">Sergipe</option>
-              <option value="TO">Tocantins</option>
-            </select>
-            <i class="fa-solid fa-caret-down"></i>
-          </span>
-        </h1>
-      </header>
-     
-      <nav class="categorias-nav">
-        <div class="scroll-container">
-          @for (cat of categorias; track cat) {
-            <button 
-              type="button"
-              class="chip-categoria" 
-              [class.active]="categoriaSelecionada === cat"
-              (click)="selecionarCategoria(cat)">
-              {{ cat }}
-            </button>
-          }
-        </div>
-      </nav>
+  <div class="container-todos-eventos">
+    
+    <app-header-filtro></app-header-filtro>
+    <app-categorias-nav></app-categorias-nav>
+    <app-busca-eventos></app-busca-eventos>
 
-      <nav class="filtros-nav">
-        <label class="btn-filtrar-cidade" for="campo-cidade">
-          <button type="button">
-            <i class="fa-solid fa-location-dot"></i>
-          </button>
-          <input 
-            id="campo-cidade"
-            type="text"
-            placeholder="Cidade"
-            list="cidades-sugeridas"
-            [(ngModel)]="cidadeFiltro" 
-            (input)="aplicarFiltrosCombo()"
-            (focus)="abrirDatalist()">
-
-            <datalist id="cidades-sugeridas">
-              @for (cidade of cidadesComEventos; track cidade) {
-                <option [value]="cidade"></option>
-              }
-            </datalist>
-
-          <button type="button" class="btn-seta" (click)="focarNoInput()">
-            <i class="fa-solid fa-caret-down"></i>
-          </button>
-        </label>
-
-        <label class="btn-filtrar-data" for="campo-data">
-          <input 
-            id="campo-data"
-            type="date"
-            [(ngModel)]="dataFiltro"
-            (change)="aplicarFiltrosCombo()">
-        </label>
-      </nav>
-
-      @if (temFiltroAtivo) {
-        <div class="feedback-busca">
-          <p>Mostrando resultados encontrados...</p>
-          <button (click)="limparBusca()">Limpar pesquisa</button>
-        </div>
-      }
-     
-      <main>
-
-        @if(listaExibida.length > 0){
-          <div class="grid-eventos">
-            @for (item of listaExibida; track item.id) {
-              <app-card-evento [dadosEvento]="item"></app-card-evento>
-            }
-          </div>
-        }
-        @else {
-          <article class="sem-eventos">
-            <h2>Ops! Nenhum evento encontrado.</h2>
-            <p>Não encontramos enventos na categoria <strong>{{categoriaSelecionada}}</strong> no momento.</p>
-            <button (click)="selecionarCategoria('Todos')" class="btn-limpar">Ver todos os eventos</button>
-          </article>
-        }
-      </main>
-   </div>
+    <main>
+      <app-lista-eventos [eventos$]="eventosFiltrados$"></app-lista-eventos>
+    </main>
+  </div>
 </section>

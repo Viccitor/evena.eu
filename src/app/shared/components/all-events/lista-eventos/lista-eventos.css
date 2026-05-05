@@ -1,18 +1,19 @@
 .lista-eventos-container {
   padding: 20px 0;
   width: 100%;
+
 }
 
 .grid-eventos {
   display: grid;
-  /* Cria colunas de no mínimo 280px. Se couber mais uma, ele adiciona automaticamente */
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 25px;
+  gap: 10px;
+  grid-template-columns: repeat(2, 1fr); 
+  max-width: 1600px;
   justify-items: center;
 }
 
 .empty-state {
-  grid-column: 1 / -1; /* Ocupa a largura total do grid */
+  grid-column: 1 / -1;
   text-align: center;
   padding: 60px 20px;
   color: var(--cor-secundaria);
@@ -81,4 +82,24 @@
 
 .btn-ver-todos:hover{
   transform: translateY(-2px) scale(1.05);
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .grid-eventos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Laptops: 3 colunas */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .grid-eventos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Desktops Grandes: Só aqui libera a 4ª coluna */
+@media (min-width: 1440px) {
+  .grid-eventos {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }

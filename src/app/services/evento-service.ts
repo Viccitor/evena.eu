@@ -10,7 +10,9 @@ export class EventoService {
     {
       id: 1, 
       titulo: 'Evento de Marketing Digital', 
-      data: '24 de fev - 20:00', 
+      dataExibicao: '24 de Fevereiro',
+      horario: '20:00',
+      datasOcorrencia: ['2026-02-24'],
       localNome: 'Hotel Transilvânia',
       cidade: 'São Paulo', 
       uf: 'SP',
@@ -23,7 +25,9 @@ export class EventoService {
     {
       id: 2, 
       titulo: 'Workshop de Design', 
-      data: '10 de mar - sábado às 14:00', 
+      dataExibicao: '10 de Março',
+      horario: '14:00',
+      datasOcorrencia: ['2026-03-10'],
       localNome: 'Teatro Multiplan',
       cidade: 'Rio de Janeiro', 
       uf: 'RJ',
@@ -36,7 +40,9 @@ export class EventoService {
     {
       id: 3, 
       titulo: 'Show Patati & Patatá', 
-      data: ' 07 de abr - sábado às 14:00', 
+      dataExibicao: '07 de Maio',
+      horario: '14:00',
+      datasOcorrencia: ['2026-05-07'],
       localNome: 'Espaço Itahy',
       cidade: 'Barueri', 
       uf: 'SP',
@@ -48,8 +54,10 @@ export class EventoService {
     },
     {
       id: 4, 
-      titulo: 'Feira de intercâmbio', 
-      data: ' Todas às sexta-feiras', 
+      titulo: 'Feira de Intercâmbio', 
+      dataExibicao: '26 de Maio',
+      horario: '09:00',
+      datasOcorrencia: ['2026-05-26'],
       localNome: 'Espaço Mandacaru',
       cidade: 'Betim', 
       uf: 'MG',
@@ -62,7 +70,9 @@ export class EventoService {
     {
       id: 5, 
       titulo: 'Babymetal', 
-      data: ' 27 de out - segunda-feira às 20:30', 
+      dataExibicao: '27 de Outubro de 2027',
+      horario: '20:30',
+      datasOcorrencia: ['2027-10-27'],
       localNome: 'SESC Sorocaba',
       cidade: 'Sorocaba', 
       uf: 'SP',
@@ -75,7 +85,9 @@ export class EventoService {
     {
       id: 6, 
       titulo: 'Jão - SUPERTURNÊ', 
-      data: '15 de jan - 20:45', 
+      dataExibicao: '15 de Janeiro',
+      horario: '20:45',
+      datasOcorrencia: ['2026-01-15'],
       localNome: 'Allianz Parque',
       cidade: 'São Paulo', 
       uf: 'SP',
@@ -89,7 +101,10 @@ export class EventoService {
     {
       id: 7,
       titulo: 'Lollapalooza',
-      data: '30 de jul. – 2 de ago. de 2026',
+      dataExibicao: '30 de Julho a 02 de Agosto',
+      horario: 'A partir das 12:00',
+      intervalo: { inicio: '2026-07-30', fim: '2026-08-02' },
+      datasOcorrencia: [],
       localNome: 'Autódromo de Interlagos',
       cidade: 'São Paulo',
       uf: 'SP',
@@ -102,7 +117,9 @@ export class EventoService {
     {
       id: 8,
       titulo: 'Show do Bita - Festa dos Bichos',
-      data: '11 de abr - 14:30',
+      dataExibicao: '11 de Abril',
+      horario: '14:30',
+      datasOcorrencia: ['2026-04-11'],
       localNome: 'Teatro Bradesco',
       cidade: 'São Paulo',
       uf: 'SP',
@@ -112,7 +129,7 @@ export class EventoService {
       lat: -23.5270,
       lng: -46.6726,
     }
-  ]
+  ];
 
   constructor() { }
 

@@ -6,6 +6,7 @@ export interface Filtros {
   termo: string;
   estado: string;
   cidade: string;
+  preco: string;
   data: string;
   categoria: string;
 }
@@ -13,63 +14,61 @@ export interface Filtros {
 @Injectable({ providedIn: 'root' })
 export class FiltroEventosService {
   private readonly filtrosPadrao: Filtros = {
-    termo: '', estado: '', cidade: '', data: '', categoria: 'Todos'
+    termo: '', estado: '', cidade: '', preco: 'todos', data: '', categoria: 'Todos'
   };
 
   private filtrosSubject = new BehaviorSubject<Filtros>(this.filtrosPadrao);
   filtros$ = this.filtrosSubject.asObservable();
 
-  private normalizarTexto(texto: string): string {
-    if (!texto) return '';
-    return texto
-      .toLowerCase()
-      .normalize('NFD') // Decompõe caracteres acentuados (ex: á -> a + ´)
-      .replace(/[\u0300-\u036f]/g, ''); // Remove os acentos (os sinais diacríticos)
+  private normalizarTexto(t: string): string {
+    return t ? t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '') : '';
   }
 
-  atualizarFiltros(novosFiltros: Partial<Filtros>): void {
+  atualizarFiltros(novosFiltros: Partial<Filtros>) {
     this.filtrosSubject.next({ ...this.filtrosSubject.value, ...novosFiltros });
   }
 
-  resetarFiltros(): void {
-    this.filtrosSubject.next(this.filtrosPadrao);
-  }
+  resetarFiltros() { this.filtrosSubject.next(this.filtrosPadrao); }
 
   obterEventosFiltrados(eventosIniciais: Evento[]): Observable<Evento[]> {
     return this.filtros$.pipe(
       map(filtros => {
-        // Normalizamos o termo que o usuário digitou
         const termoBusca = this.normalizarTexto(filtros.termo);
+        const cidadeBusca = this.normalizarTexto(filtros.cidade);
 
         return eventosIniciais.filter(evento => {
-          
-          // 1. Filtro por Termo (Busca no Header)
-          // Normalizamos todos os campos do evento antes de comparar
-          const tituloNorm = this.normalizarTexto(evento.titulo);
-          const localNorm = this.normalizarTexto(evento.localNome);
-          const cidadeNorm = this.normalizarTexto(evento.cidade);
-
+          // 1. Busca Global (Termo)
           const matchTermo = !termoBusca || 
-            tituloNorm.includes(termoBusca) ||
-            localNorm.includes(termoBusca) ||
-            cidadeNorm.includes(termoBusca);
+            this.normalizarTexto(evento.titulo).includes(termoBusca) ||
+            this.normalizarTexto(evento.localNome).includes(termoBusca);
 
-          // 2. Filtro por Estado (UF geralmente não tem acento, mas normalizamos por segurança)
-          const matchEstado = !filtros.estado || 
-            this.normalizarTexto(evento.uf) === this.normalizarTexto(filtros.estado);
+          // 2. Cidade (Input)
+          const matchCidade = !cidadeBusca || 
+            this.normalizarTexto(evento.cidade).includes(cidadeBusca);
 
-          // 3. Filtro por Cidade (Dropdown)
-          const matchCidade = !filtros.cidade || 
-            cidadeNorm.includes(this.normalizarTexto(filtros.cidade));
-          
-          // 4. Filtro por Categoria
-          const matchCategoria = filtros.categoria === 'Todos' || 
-            (evento.categoria && evento.categoria.includes(filtros.categoria));
+          // 3. Preço (Dropdown)
+          const p = evento.preco;
+          const fP = filtros.preco;
+          const matchPreco = fP === 'todos' ? true :
+                             fP === 'gratis' ? p === 0 :
+                             fP === 'ate50' ? (p > 0 && p <= 50) :
+                             fP === '50-150' ? (p > 50 && p <= 150) :
+                             fP === 'mais150' ? p > 150 : true;
 
-          // 5. Filtro por Data
-          const matchData = !filtros.data || (evento.data && evento.data.includes(filtros.data));
+          // 4. Data (Calendário ISO)
+          const dF = filtros.data; // "2026-07-31"
+          let matchData = true;
+          if (dF) {
+            const noArray = evento.datasOcorrencia?.includes(dF);
+            const noIntervalo = evento.intervalo && (dF >= evento.intervalo.inicio && dF <= evento.intervalo.fim);
+            matchData = !!(noArray || noIntervalo);
+          }
 
-          return matchTermo && matchEstado && matchCidade && matchCategoria && matchData;
+          // 5. Categoria e Estado
+          const matchCat = filtros.categoria === 'Todos' || evento.categoria.includes(filtros.categoria);
+          const matchEst = !filtros.estado || evento.uf === filtros.estado;
+
+          return matchTermo && matchCidade && matchPreco && matchData && matchCat && matchEst;
         });
       })
     );

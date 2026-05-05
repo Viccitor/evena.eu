@@ -1,12 +1,14 @@
 .lista-eventos-container {
   padding: 20px 0;
   width: 100%;
+
 }
 
 .grid-eventos {
   display: grid;
   gap: 10px;
-  grid-template-columns: repeat(2, 1fr); /* 1 coluna no mobile */
+  grid-template-columns: repeat(2, 1fr); 
+  max-width: 1600px;
   justify-items: center;
 }
 
@@ -96,7 +98,7 @@
 }
 
 /* Desktops Grandes: Só aqui libera a 4ª coluna */
-@media (min-width: 1400px) {
+@media (min-width: 1440px) {
   .grid-eventos {
     grid-template-columns: repeat(4, 1fr);
   }

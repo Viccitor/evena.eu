@@ -27,7 +27,7 @@
         id="campo-busca"
         [(ngModel)]="termoPesquisa"
         (keyup.enter)="fazerPesquisa()"
-        >
+        autocomplete="off" >
 
       @if (pesquisaAtiva) {
         <button (click)="togglePesquisa()" class="btn-fechar" type="button" aria-label="Fechar busca">×</button>

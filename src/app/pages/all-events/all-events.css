@@ -14,256 +14,41 @@
     box-sizing: border-box;  
 }
 
-.titulo-sessao {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  color: var(--cor-secundaria);
-  font-size: 2.2rem;
-  margin-bottom: 25px;
-  font-family: var(--fonte-principal);
-}
-
-.wrapper-select-estado{
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-}
-.select-estado-topo {
-  appearance: none; 
-  background: transparent;
-  border: none;
-  color: var(--cor-secundaria);
-  font-family: inherit;
-  font-size: 1.9rem;
-  font-weight: bold;
-  cursor: pointer;
-  padding-right: 25px;
-  outline: none;
-  width: 70%;
-  border-bottom: 1px solid var(--cor-secundaria);
-}
-
-.seta-estado {
-  position: absolute;
-  right: 0;
-  font-size: 0.5em; /* Seta menor e elegante */
-  color: #00ffa3;
-  pointer-events: none; /* Faz o clique passar através da seta para o select */
-}
-
-/* Garante que o menu suspenso seja legível no dark mode */
-.select-estado-topo option {
-  width: 16px;
-  background-color: #1a1a1a; 
-  color: #fff;
-}
-
-.scroll-container {
-  display: flex;
-  gap: 12px;
-  overflow-x: auto;
-  padding-bottom: 10px;
-  scrollbar-width: none;
-}
-
-.scroll-container::-webkit-scrollbar {
-  display: none;
-}
-
-.chip-categoria {
-  background: #ffffff0d;
-  border: 1px solid #ffffff1a;
-  color: var(--cor-secundaria);
-  padding: 10px 25px;
-  border-radius: 50px;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: 0.2s;
-  font-family: var(--fonte-principal);
-}
-
-.chip-categoria.active {
-  background: var(--cor-secundaria);
-  color: var(--cor-principal);
-  font-weight: bold;
-  border-color: var(--cor-secundaria);
-}
-
-.filtros-nav{
-  margin-bottom: 35px;
-  display: flex;
-  gap: 15px;
-}
-.btn-filtrar-cidade{
-  cursor: text;
-  display: flex;
-  align-items: center;
-  border: 1.5px solid #579247;
-  border-radius: 50px;
-  padding: 10px 25px;
-  background: #ffffff0d;
-  transition: all 0.3s ease;
-  width: 40%;
-  color: var(--cor-secundaria);
-}
-
-.btn-filtrar-cidade button{
-  cursor: pointer;
-  border: none;
-  background: none;
-  margin-right: 5px;
-}
-
-.btn-filtrar-cidade #campo-cidade{
-  outline: none;
-  background: transparent;
-  border: none;
-  color: var(--cor-secundaria);
-  width: 100%;
-}
-
-input::placeholder {
-  color: var(--cor-secundaria);
-  font-size: 15px;
-  opacity: 1; 
-  font-family: var(--fonte-principal);
-}
-
-.fa-location-dot, .fa-caret-down{
-  width: 25px;
-  height: 25px;
-  color: var(--cor-secundaria);
-}
-.fa-caret-down{
-  width: 20px;
-  height: 20px;
-}
-
-.btn-filtrar-data{
-  cursor: text;
-  display: flex;
-  align-items: center;
-  border: 1.5px solid #579247;
-  border-radius: 50px;
-  padding: 10px 25px;
-  background: #ffffff0d;
-  transition: all 0.3s ease;
-  width: 30%;
-  color: var(--cor-secundaria);
-}
-#campo-data{
-  border: none;
-  border-radius: 50px;
-  background: none;
-  color: var(--cor-secundaria);
-  font-family: var(--fonte-principal);
-  width: 100%;
-}
-
-/* Remove a seta padrão em navegadores Chrome, Safari e Edge */
-#campo-cidade::-webkit-calendar-picker-indicator {
-    display: none !important;
-    opacity: 0;
-    width: 0;
-}
-
-/* Remove a seta/aparência padrão no Firefox e outros */
-#campo-cidade {
-    appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-}
-input[type="date"]::-webkit-calendar-picker-indicator {
-    cursor: pointer;
-    width: 20px;
-    height: 20px;
-    display: none ;
-}
-
-.grid-eventos {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  min-height: 350px;
-  gap: 30px;
-  width: 100%;
-  justify-items: center;
-}
-
-.sem-eventos{
-  font-family: var(--fonte-secundaria);
-  color: var(--cor-principal);
-  padding: 10px 20px;
-  min-height: 350px;
-}
-
-.btn-limpar{
-  border: 2px solid var(--cor-principal);
-  border-radius: 30px;
-  background: var(--cor-principal);
-  padding: 15px 30px;
-  cursor: pointer;
-  transition: 0.3s;
-  color: var(--cor-secundaria);
-  font-weight: 600;
-  font-size: 0.9rem;
-  font-family: var(--fonte-secundaria);
-}
-.btn-limpar:hover{
-  border: 2px solid var(--cor-secundaria);
-}
-
-.feedback-busca{
+.header-resultados {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  margin-top: 10px;
+  font-family: var(--fonte-principal);
+  animation: fadeIn 0.3s ease-in-out;
 }
 
-.feedback-busca p{
-  font-family: var(--fonte-secundaria);
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.status-texto {
   color: var(--cor-principal);
-  font-weight: 700;
-  font-size: 1.3rem;
-}
-
-.feedback-busca button{
-  background-color: var(--cor-principal);
-  color: var(--cor-secundaria);
-  padding: 15px 30px;
-  border-radius: 30px;
-  border: 2px solid var(--cor-principal);
   font-weight: 600;
-  margin-bottom: 30px;
+  font-size: 1.1rem;
+}
+
+.btn-limpar-topo, .btn-ver-todos {
+  background-color: var(--cor-principal); /* Fundo roxo muito escuro */
+  color: var(--cor-secundaria); /* Verde Neon igual à imagem */
+  border: none;
+  padding: 12px 30px;
+  border-radius: 40px; /* Bordas bem arredondadas */
+  font-weight: bold;
+  font-size: 0.9rem;
   cursor: pointer;
-}
-.feedback-busca button:hover{
-  border: 2px solid var(--cor-secundaria);
-}
-
-
-@media (max-width: 768px) {
-  .grid-eventos {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 5px;
-  }
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-@media (min-width: 769px) and (max-width: 1024px){
-  .grid-eventos{
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-  }
-
-    .filtros-nav {
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .btn-filtrar-cidade, .btn-filtrar-data {
-    width: 100%; /* Ocupa a largura toda no mobile */
-  }
-  #campo-data {
-    min-height: 25px;
-    cursor: pointer;
-  }
+.btn-limpar-topo:hover, .btn-ver-todos:hover {
+  filter: brightness(1.3);
+  transform: translateY(-2px);
 }

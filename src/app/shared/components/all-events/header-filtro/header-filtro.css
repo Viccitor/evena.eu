@@ -7,7 +7,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 12px;
-  color: var(--cor-secundaria);
+  color: var(--cor-princip);
   font-size: 2.2rem;
   font-family: var(--fonte-principal);
 }

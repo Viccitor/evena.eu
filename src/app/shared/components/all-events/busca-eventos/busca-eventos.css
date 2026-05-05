@@ -1,9 +1,9 @@
 .busca-container {
   display: flex;
   gap: 15px;
-  width: 100%;
+  width: 98%;
   margin-top: 10px;
-  border: 1px;
+  padding: 0 10px;
 }
 
 .input-group {

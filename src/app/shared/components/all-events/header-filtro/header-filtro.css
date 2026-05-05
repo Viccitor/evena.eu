@@ -22,7 +22,7 @@
   appearance: none; /* Remove a seta padrão */
   background: transparent;
   border: none;
-  border-bottom: 2px dashed var(--cor-secundaria);
+  border-bottom: 2px solid var(--cor-secundaria);
   color: var(--cor-secundaria);
   font-family: inherit;
   font-size: inherit;
@@ -30,7 +30,7 @@
   padding-right: 35px;
   cursor: pointer;
   outline: none;
-  width: auto; /* Ajusta ao tamanho do texto */
+  width: auto;
 }
 
 .seta-icon {

@@ -19,7 +19,7 @@
 }
 
 .wrapper-select select {
-  appearance: none; /* Remove a seta padrão */
+  appearance: none; 
   background: transparent;
   border: none;
   border-bottom: 2px solid var(--cor-secundaria);
@@ -27,7 +27,7 @@
   font-family: inherit;
   font-size: inherit;
   font-weight: bold;
-  padding-right: 35px;
+  padding-right: 30px;
   cursor: pointer;
   outline: none;
   width: auto;
@@ -36,14 +36,19 @@
 .seta-icon {
   position: absolute;
   right: 5px;
-  font-size: 0.5em; /* Seta pequena e discreta */
+  font-size: 0.5em; 
   color: var(--cor-secundaria);
   pointer-events: none;
 }
 
-/* Estilo para as opções do select (evita letras gigantes) */
 select option {
   background-color: #1a1a1a;
   color: #fff;
   font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .wrapper-select select{
+    width: 50%;
+  }
 }

@@ -1,10 +1,8 @@
 .busca-container {
   display: flex;
   gap: 15px;
-  width: 100%; /* Ajustado de 99% para evitar scroll lateral */
-  max-width: 1200px; /* Limite para não esticar demais em telas enormes */
-  margin: 15px auto 0; /* Centraliza o container */
-  padding: 0 10px;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .input-group {
@@ -45,31 +43,29 @@
   cursor: pointer;
 }
 
-/* Remove a aparência padrão do select para ele aceitar o estilo customizado */
 .input-group select {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
 }
 
-/* Cor das opções dentro do select (senão ficam brancas/ilegíveis) */
+
 .input-group select option {
-  background-color: #2e1a5e; /* Roxo escuro do seu tema */
+  background-color: var(--cor-principal); 
   color: #fff;
 }
 
 .input-group input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: #fff;
 }
 
 .arrow {
   color: var(--cor-principal);
   font-size: 0.8rem;
   margin-left: 10px;
-  pointer-events: none; /* Garante que o clique passe para o select */
+  pointer-events: none; 
 }
 
-/* Ajuste específico para o input de data */
 input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(1);
   cursor: pointer;
@@ -79,7 +75,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* Responsividade */
 @media (max-width: 900px) {
   .busca-container {
-    flex-wrap: wrap; /* Permite quebrar linha se necessário antes do mobile total */
+    flex-wrap: wrap; 
   }
 }
 
@@ -90,6 +86,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
   
   .input-group {
-    width: 85%;
+    width: 30%;
   }
 }

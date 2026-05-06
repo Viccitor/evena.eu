@@ -1,10 +1,8 @@
 .busca-container {
   display: flex;
   gap: 15px;
-  width: 100%; /* Ajustado de 99% para evitar scroll lateral */
-  max-width: 1200px; /* Limite para não esticar demais em telas enormes */
-  margin: 15px auto 0; /* Centraliza o container */
-  padding: 0 10px;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .input-group {

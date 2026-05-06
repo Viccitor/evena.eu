@@ -91,14 +91,14 @@
 }
 
 /* Laptops: 3 colunas */
-@media (min-width: 1025px) and (max-width: 1440px) {
+@media (min-width: 1025px) and (max-width: 1450px) {
   .grid-eventos {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 /* Desktops Grandes: Só aqui libera a 4ª coluna */
-@media (min-width: 1440px) {
+@media (min-width: 1450px) {
   .grid-eventos {
     grid-template-columns: repeat(4, 1fr);
   }
